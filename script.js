@@ -1,7 +1,9 @@
 // Selecting the HTML element 
+const body = document.querySelector("body");
+const loader = document.getElementById("loadingIndicator");
+const selectPrice = document.getElementById("kuDropSortBy");
 const totalResultsFound = document.getElementById("total-result");
 const productContainer = document.querySelector(".kuvmResultsList");
-const selectPrice = document.getElementById("kuDropSortBy");
 const modalContent = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const closeBtn = document.querySelector(".modal-close");
@@ -25,6 +27,7 @@ const payload = {
 
 // Fetch Data from Product API using Promise
 function fetchData() {
+  loader.style.display = "block"; // Show Loading
   fetch("https://eucs23v2.ksearchnet.com/cs/v2/search", {
     method: "POST",
     body: JSON.stringify(payload),
@@ -66,6 +69,7 @@ function handleError(error) {
 function updateProductContainer(records) {
   productContainer.innerHTML = "";
   records.forEach((record) => insertCard(record));
+  loader.style.display = "none";  // Hide Loader
 }
 
 // Insert the Product Card in Prouct Container
@@ -119,15 +123,11 @@ function openProductModal(e) {
   const encodedString = e.target.getAttribute("data-item");
   const decodedString = decodeURIComponent(encodedString);
   const item = JSON.parse(decodedString);
-  console.log(item);
   let modalHTML =`
   <div class="modal-container">
-    <div class="modal-image">
-    <img
-    src=${item.image}
-    alt=${item.name}
-    title=${item.name}
-    />
+    <div class="modal-image kuvmImgWrap">
+      <img src=${item.image || dummyImgUrl} alt=${item.name} class="kuProdImg" title=${item.name}>
+      <img src=${item.imageHover || dummyImgUrl} alt=${item.name} class="kuProdImg" title=${item.name}>
     </div>
     <div class="modal-content">
       <h2>${item.name}</h2>
@@ -146,6 +146,9 @@ function openProductModal(e) {
   modalContent.style.display = "block";
   modalContent.innerHTML += modalHTML;
   overlay.classList.toggle("hidden");
+  // Avoid Scroll while Modal Open
+  body.style.overflow = "hidden";
+  document.addEventListener("keydown", handleEscapeKey);
 }
 
 // Handle the Opening and Closing of Modal
@@ -162,6 +165,14 @@ function closeProductModal() {
   modalContent.classList.toggle("hidden");
   overlay.classList.toggle("hidden");
   modalContent.innerHTML = `<span class="modal-close" title="Close">&times;</span>`;
+  body.style.overflow = "unset";
+}
+
+function handleEscapeKey(event) {
+  const overlayHidden = overlay.classList.contains("hidden");
+  if (event.key === "Escape" && !(overlayHidden)) {
+      closeProductModal();
+  }
 }
 
 // Fetch Data on Initial Load 

@@ -12,6 +12,8 @@ body {
   background-color: #edf2f6;
   font-family: Poppins, monospace;
   font-size: 16px;
+  /* Disable the default tap highlight on mobile devices */
+  -webkit-tap-highlight-color: transparent;
 }
 
 .container {
@@ -51,19 +53,56 @@ select {
 
 /* Common Styling End Here */
 
+/* Loader styles */
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -25px;
+  display: none;
+}
+
+/* Animation for the loader */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+}
+
 /* Product Card Styling Start Here */
 .kuvmResultsList {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   gap: 45px;
-  justify-content: center;
-  flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 30px 0;
 }
 
 .kuvmTop {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   gap: 10px;
 }
 
@@ -71,7 +110,8 @@ select {
   width: 300px;
   border-radius: 8px;
   background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }
 
@@ -88,20 +128,29 @@ select {
   background-size: cover;
   background-position: center;
   border-radius: 8px;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 /* Hide the second image by default */
 .kuvmImgWrap img:nth-child(2) {
-  display: none;
+  position: absolute;
+  top: 0;  
+  left: 0;
+  opacity: 0;
 }
 
 /* Styles to apply on hover */
 .kuvmImgWrap:hover img:nth-child(1) {
-  display: none;
+  opacity: 0;
 }
 
 .kuvmImgWrap:hover img:nth-child(2) {
-  display: block;
+  opacity: 1;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .kuvmProdBottom {
@@ -144,11 +193,14 @@ button,
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   width: 70%;
   background-color: white;
   border-radius: 7px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   z-index: 10;
   overflow: hidden;
 }
@@ -160,7 +212,8 @@ button,
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
   z-index: 5;
   overflow: hidden;
 }
@@ -170,6 +223,8 @@ button,
 }
 
 .modal-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   max-height: 350px;
 }
@@ -230,7 +285,13 @@ button,
   .modal-container {
     font-size: 14px;
     max-height: unset;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .modal {
+    width: 80%;
   }
   .modal-image,
   .modal-content {
@@ -238,6 +299,9 @@ button,
   }
   .modal-image img {
     height: 260px;
+  }
+  .modal-content {
+    padding: 20px 20px 25px;
   }
 }
 /* Media Query End Here */
