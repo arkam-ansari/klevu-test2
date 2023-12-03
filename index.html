@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klevu | Test-002</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <main class="container">
+      <div class="wrapper">
+        <div class="kuvmTop">
+          <!-- Product Card Sort Start Here -->
+          <label for="kuDropSortBy">Sort By: </label>
+          <select id="kuDropSortBy">
+            <option value="select">Select Price</option>
+            <option value="low">Price Low to High</option>
+            <option value="high">Price High to Low</option>
+          </select>
+          <label for="total-result"
+            >Total results found: <span id="total-result">--</span>
+          </label>
+          <!-- Product Card Sort End Here -->
+        </div>
+        <!-- Product Card Display Here Dynamically -->
+        <ul class="kuvmResultsList"></ul>
+      </div>
+    </main>
+
+    <!-- Modals Start From Here -->
+    <div class="modal hidden">
+      <span class="modal-close" title="Close">&times;</span>
+    </div>
+    <div class="overlay hidden"></div>
+    <!-- Modals End Here -->
+
+    <script async src="./script.js"></script>
+  </body>
+</html>
