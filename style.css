@@ -252,6 +252,7 @@ button,
   right: 15px;
   font-size: 35px;
   cursor: pointer;
+  z-index: 2;
 }
 
 .modal-content .kuDescription {
