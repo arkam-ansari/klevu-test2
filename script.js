@@ -75,7 +75,7 @@ function updateProductContainer(records) {
 // Insert the Product Card in Prouct Container
 function insertCard(item) {
   const encodedItem = encodeURIComponent(JSON.stringify(item));
-  const dummyImgUrl = "https://cdn.shopify.com/s/files/1/0872/0452/products/mb01-blue-0_4aed1c08-aa06-48a5-84e5-630e28d9177a_600X400.jpg?v=1496239350"
+  const dummyImgUrl = "https://cdn.shopify.com/s/files/1/0872/0452/products/mb01-blue-0_4aed1c08-aa06-48a5-84e5-630e28d9177a_600X400.jpg?v=1496239350";
   const content = `
     <li class="kuvmProduct" data-id=${item.id} data-isdeleted="" data-instock=${item.inStock} data-itemgroupid=${item.itemGroupId}}>
       <div class="kuvmProdWrap">
@@ -123,6 +123,7 @@ function openProductModal(e) {
   const encodedString = e.target.getAttribute("data-item");
   const decodedString = decodeURIComponent(encodedString);
   const item = JSON.parse(decodedString);
+  const dummyImgUrl = "https://cdn.shopify.com/s/files/1/0872/0452/products/mb01-blue-0_4aed1c08-aa06-48a5-84e5-630e28d9177a_600X400.jpg?v=1496239350";
   let modalHTML =`
   <div class="modal-container">
     <div class="modal-image kuvmImgWrap">
