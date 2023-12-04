@@ -168,12 +168,16 @@ function closeProductModal() {
   body.style.overflow = "unset";
 }
 
+// On Pressing Escape Key Modal will Close 
 function handleEscapeKey(event) {
   const overlayHidden = overlay.classList.contains("hidden");
   if (event.key === "Escape" && !(overlayHidden)) {
       closeProductModal();
   }
 }
+
+// On Clicking Overlay Modal will CLose
+overlay.addEventListener("click", closeProductModal);
 
 // Fetch Data on Initial Load 
 fetchData();
